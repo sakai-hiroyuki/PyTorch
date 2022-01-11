@@ -4,7 +4,7 @@ from torch import nn
 from torch.optim import Adam
 
 from models import resnet20_cifar10, SequenceTaggingNet, SequenceGenerationNet
-from experiments import *
+from experiments import ExperimentCIFAR10, ExperimentIMDb, ExperimentShakespeare
 
 from torchsummary import summary
 
@@ -69,12 +69,12 @@ def shakespeare() -> nn.Module:
         csv_dir    = './results/csv/shakespeare/lstm',
         csv_name   = 'adam.csv',
         prm_dir    = './results/prm/shakespeare/lstm',
-        prm_name   = 'adam.csv'
+        prm_name   = 'adam.prm'
     )
 
     return experiment()
 
 
 if __name__ == '__main__':
-    cifar10()
+    shakespeare()
     

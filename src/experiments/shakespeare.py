@@ -1,5 +1,6 @@
 import os
 import string
+import subprocess
 from tqdm import tqdm
 from time import time
 from typing import Optional
@@ -67,6 +68,7 @@ class ExperimentShakespeare(Experiment):
         csv_name  : Optional[str] = None,
         prm_dir   : str = './results/prm',
         prm_name  : Optional[str] = None,
+        download  : bool = True
     ) -> None:
 
         super().__init__(
@@ -80,8 +82,26 @@ class ExperimentShakespeare(Experiment):
             prm_dir=prm_dir,
             prm_name=prm_name
         )
-        self._vocab_size: int = len(string.printable)
-        self.data_name:   str = data_name
+        self._vocab_size: int  = len(string.printable)
+        self.data_name:   str  = data_name
+        self.download:    bool = download
+
+        if self.download:
+            if not os.path.exists(os.path.join(self.data_dir, 'shakespeare')):
+                os.makedirs(os.path.join(self.data_dir, 'shakespeare'))
+                subprocess.run(args=[
+                    'wget',
+                    '-P',
+                    os.path.join(self.data_dir, 'shakespeare'),
+                    'https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt'
+                ])
+                subprocess.run(args=[
+                    'mv',
+                    os.path.join(self.data_dir, 'shakespeare/input.txt'),
+                    os.path.join(self.data_dir, 'shakespeare/tinyshakespeare.txt')
+                ])
+            else:
+                print('Files already downloaded and verified')
 
     def prepare_data(self) -> tuple[DataLoader, DataLoader]:
         shakespeare_data   = ShakespeareDataset(path=os.path.join(self.data_dir, self.data_name), chunk_size=200)

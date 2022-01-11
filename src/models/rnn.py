@@ -1,7 +1,10 @@
 import torch
 from torch import nn
 
-__all__ = ['SequenceTaggingNet', 'SequenceGenerationNet']
+__all__ = [
+    'SequenceTaggingNet',
+    'SequenceGenerationNet'
+]
 
 
 class SequenceTaggingNet(nn.Module):
