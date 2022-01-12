@@ -12,7 +12,6 @@ from torchvision.datasets import CIFAR10
 from experiments import Experiment
 from utils import Cutout
 
-
 __all__ = ['ExperimentCIFAR10']
 
 
@@ -24,9 +23,9 @@ class ExperimentCIFAR10(Experiment):
         max_epoch : int,
         batch_size: int,
         data_dir  : str = './data',
-        csv_dir   : str = './results/csv',
+        csv_dir   : str = './results/csv/cifar10',
         csv_name  : Optional[str] = None,
-        prm_dir   : str = './results/prm',
+        prm_dir   : str = './results/prm/cifar10',
         prm_name  : Optional[str] = None,
         download  : bool=True,
         cutout    : bool=False

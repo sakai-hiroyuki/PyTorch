@@ -14,7 +14,6 @@ from experiments import Experiment
 
 __all__ = [
     'ExperimentShakespeare',
-    'generate_shakespeare'
 ]
 
 
@@ -64,9 +63,9 @@ class ExperimentShakespeare(Experiment):
         batch_size: int,
         data_dir  : str = './data',
         data_name : str = 'shakespeare/tinyshakespeare.txt',
-        csv_dir   : str = './results/csv',
+        csv_dir   : str = './results/csv/shakespeare',
         csv_name  : Optional[str] = None,
-        prm_dir   : str = './results/prm',
+        prm_dir   : str = './results/prm/shakespeare',
         prm_name  : Optional[str] = None,
         download  : bool = True
     ) -> None:

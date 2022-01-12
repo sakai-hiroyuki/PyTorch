@@ -108,9 +108,9 @@ class ExperimentIMDb(Experiment):
         max_epoch : int,
         batch_size: int,
         data_dir  : str = './data',
-        csv_dir   : str = './results/csv',
+        csv_dir   : str = './results/csv/imdb',
         csv_name  : Optional[str] = None,
-        prm_dir   : str = './results/prm',
+        prm_dir   : str = './results/prm/imdb',
         prm_name  : Optional[str] = None,
         download  : bool=True
     ) -> None:

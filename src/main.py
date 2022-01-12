@@ -39,7 +39,7 @@ def imdb() -> nn.Module:
     experiment = ExperimentIMDb(
         model      = model,
         optimizer  = optimizer,
-        max_epoch  = 10,
+        max_epoch  = 2,
         batch_size = 32,
         csv_dir    = './results/csv/imdb/lstm',
         csv_name   = 'adam.csv',
@@ -65,7 +65,7 @@ def shakespeare() -> nn.Module:
     experiment = ExperimentShakespeare(
         model      = model,
         optimizer  = optimizer,
-        max_epoch  = 100,
+        max_epoch  = 10,
         batch_size = 32,
         csv_dir    = './results/csv/shakespeare/lstm',
         csv_name   = 'adam.csv',

@@ -11,7 +11,7 @@ from torch.cuda import is_available
 from torch.utils.data import DataLoader
 from torch.optim import Optimizer
 
-__all__ = ['Experiment', 'save_params', 'to_csv']
+__all__ = ['Experiment']
 
 
 class Experiment(metaclass=ABCMeta):
@@ -137,12 +137,14 @@ def to_csv(
 ) -> None:
 
     df: pd.DataFrame = pd.DataFrame(record, columns=None, index=None)
+
+    if os.path.isfile(os.path.join(csv_dir, csv_name)):
+        print(f'{os.path.join(csv_dir, csv_name)} already exists.')
     if not os.path.isdir(csv_dir):
         os.makedirs(csv_dir)
     if csv_name is None:
         csv_name = f'{_now2str()}.csv'
 
-    print(f'{os.path.join(csv_dir, csv_name)} already exists.')
     df.to_csv(os.path.join(csv_dir, csv_name), mode='a', header=None, index=None)
 
 
