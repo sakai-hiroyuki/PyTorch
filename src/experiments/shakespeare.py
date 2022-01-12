@@ -83,8 +83,8 @@ class ExperimentShakespeare(Experiment):
             prm_name=prm_name
         )
         self._vocab_size: int  = len(string.printable)
-        self.data_name:   str  = data_name
-        self.download:    bool = download
+        self.data_name  : str  = data_name
+        self.download   : bool = download
 
     def prepare_data(self) -> tuple[DataLoader, DataLoader]:
         if self.download:

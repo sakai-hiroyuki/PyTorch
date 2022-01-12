@@ -18,7 +18,7 @@ def cifar10() -> nn.Module:
     experiment = ExperimentCIFAR10(
         model      = model,
         optimizer  = optimizer,
-        max_epoch  = 10,
+        max_epoch  = 2,
         batch_size = 256,
         csv_dir    = './results/csv/cifar10/resnet20',
         csv_name   = 'adam.csv',

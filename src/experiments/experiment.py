@@ -84,10 +84,20 @@ class Experiment(metaclass=ABCMeta):
         '''
         実験を実行する.
         '''
+
+        # モデルが存在するならロードする.
+        if os.path.isfile(os.path.join(self.prm_dir, self.prm_name)):
+            print(f'{os.path.join(self.prm_dir, self.prm_name)} already exists.')
+            self.model.load_state_dict(torch.load(os.path.join(self.prm_dir, self.prm_name)))
         self.model = self.model.to(self.device)
+
+        # DataLoaderを準備する.
         train_loader, test_loader = self.prepare_data()
 
+        # 各Epochで必要な情報を保持しておくリスト.
         record: list[list[float]] = []
+
+        # 学習とテストのforループ.
         for epoch in tqdm(range(self.max_epoch)):
             # ネットワークの訓練
             self.model.train()
@@ -131,7 +141,9 @@ def to_csv(
         os.makedirs(csv_dir)
     if csv_name is None:
         csv_name = f'{_now2str()}.csv'
-    df.to_csv(os.path.join(csv_dir, csv_name), header=None, index=None)
+
+    print(f'{os.path.join(csv_dir, csv_name)} already exists.')
+    df.to_csv(os.path.join(csv_dir, csv_name), mode='a', header=None, index=None)
 
 
 def _now2str() -> str:
