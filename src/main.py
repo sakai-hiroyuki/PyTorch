@@ -24,6 +24,7 @@ def cifar10() -> nn.Module:
         csv_name   = 'adam.csv',
         prm_dir    = './results/prm/cifar10/resnet20',
         prm_name   = 'adam.prm',
+        cutout     = True
     )
 
     return experiment()
@@ -76,5 +77,5 @@ def shakespeare() -> nn.Module:
 
 
 if __name__ == '__main__':
-    shakespeare()
+    cifar10()
     

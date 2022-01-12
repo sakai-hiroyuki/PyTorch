@@ -6,10 +6,11 @@ import torch
 from torch import nn
 from torch.utils.data import Dataset, DataLoader
 from torch.optim import Optimizer
-from torchvision.transforms import ToTensor
+from torchvision.transforms import ToTensor, Compose
 from torchvision.datasets import CIFAR10
 
 from experiments import Experiment
+from utils import Cutout
 
 
 __all__ = ['ExperimentCIFAR10']
@@ -27,7 +28,8 @@ class ExperimentCIFAR10(Experiment):
         csv_name  : Optional[str] = None,
         prm_dir   : str = './results/prm',
         prm_name  : Optional[str] = None,
-        download  : bool=True
+        download  : bool=True,
+        cutout    : bool=False
     ) -> None:
 
         super().__init__(
@@ -42,10 +44,27 @@ class ExperimentCIFAR10(Experiment):
             prm_name=prm_name
         )
         self.download = download
+        self.cutout = cutout
     
     def prepare_data(self) -> tuple[DataLoader, DataLoader]:
-        train_data  : Dataset    = CIFAR10(self.data_dir, train=True, download=self.download, transform=ToTensor())
-        test_data   : Dataset    = CIFAR10(self.data_dir, train=False, download=self.download, transform=ToTensor())
+        train_transforms = [ToTensor()]
+        if self.cutout:
+            train_transforms.append(Cutout(1, 16))
+        train_data: Dataset = CIFAR10(
+            self.data_dir,
+            train=True,
+            download=self.download,
+            transform=Compose(train_transforms)
+        )
+
+        test_transforms = [ToTensor()]
+        test_data: Dataset = CIFAR10(
+            self.data_dir,
+            train=False,
+            download=self.download,
+            transform=Compose(test_transforms)
+        )
+
         train_loader: DataLoader = DataLoader(train_data, batch_size=self.batch_size, shuffle=True)
         test_loader : DataLoader = DataLoader(test_data, batch_size=self.batch_size, shuffle=False)
         return train_loader, test_loader
