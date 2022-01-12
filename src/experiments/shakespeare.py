@@ -86,6 +86,7 @@ class ExperimentShakespeare(Experiment):
         self.data_name:   str  = data_name
         self.download:    bool = download
 
+    def prepare_data(self) -> tuple[DataLoader, DataLoader]:
         if self.download:
             if not os.path.exists(os.path.join(self.data_dir, 'shakespeare')):
                 os.makedirs(os.path.join(self.data_dir, 'shakespeare'))
@@ -103,7 +104,6 @@ class ExperimentShakespeare(Experiment):
             else:
                 print('Files already downloaded and verified')
 
-    def prepare_data(self) -> tuple[DataLoader, DataLoader]:
         shakespeare_data   = ShakespeareDataset(path=os.path.join(self.data_dir, self.data_name), chunk_size=200)
         shakespeare_loader = DataLoader(shakespeare_data, batch_size=32, shuffle=True)
         return shakespeare_loader, None
