@@ -1,4 +1,3 @@
-from __future__ import annotations
 import string
 
 from torch import nn
