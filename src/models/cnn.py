@@ -5,7 +5,7 @@ __all__ = ['SimpleCNN_MNIST']
 
 class SimpleCNN_MNIST(nn.Module):
     def __init__(self):
-        super(SimpleCNN_MNIST, self).__init__()
+        super().__init__()
         self.conv_net = nn.Sequential(
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=5),
             nn.MaxPool2d(kernel_size=2),

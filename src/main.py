@@ -3,8 +3,18 @@ import string
 from torch import nn
 from torch.optim import Adam
 
-from models import resnet20_cifar10, SequenceTaggingNet, SequenceGenerationNet
-from experiments import ExperimentCIFAR10, ExperimentIMDb, ExperimentShakespeare
+from models import (
+    resnet20_cifar10,
+    SimpleCNN_MNIST,
+    SequenceTaggingNet,
+    SequenceGenerationNet
+)
+from experiments import (
+    ExperimentCIFAR10,
+    ExperimentMNIST,
+    ExperimentIMDb,
+    ExperimentShakespeare
+)
 
 from torchsummary import summary
 
@@ -25,6 +35,26 @@ def cifar10() -> nn.Module:
         prm_dir    = './results/prm/cifar10/resnet20',
         prm_name   = 'adam.prm',
         cutout     = True
+    )
+
+    return experiment()
+
+
+def mnist() -> nn.Module:
+    model = SimpleCNN_MNIST()
+    optimizer = Adam(model.parameters(), lr=1e-3, betas=(0.9, 0.999))
+
+    summary(model, [1, 28, 28])
+
+    experiment = ExperimentMNIST(
+        model= model,
+        optimizer=optimizer,
+        max_epoch=2,
+        batch_size=256,
+        csv_dir    = './results/csv/mnist/cnn',
+        csv_name   = 'adam.csv',
+        prm_dir    = './results/prm/mnist/cnn',
+        prm_name   = 'adam.prm',
     )
 
     return experiment()
@@ -77,5 +107,5 @@ def shakespeare() -> nn.Module:
 
 
 if __name__ == '__main__':
-    cifar10()
+    mnist()
     
