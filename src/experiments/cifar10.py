@@ -61,7 +61,7 @@ class ExperimentCIFAR10(Experiment):
         test_data: Dataset = CIFAR10(
             self.data_dir,
             train=False,
-            download=self.download,
+            download=False,
             transform=Compose(test_transforms)
         )
 
