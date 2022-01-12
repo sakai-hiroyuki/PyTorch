@@ -20,11 +20,11 @@ class Cutout(object):
       neural networks with cutout." arXiv preprint arXiv:1708.04552 (2017).
     - https://github.com/uoguelph-mlrg/Cutout
     '''
-    def __init__(self, n_holes: int, length: int):
+    def __init__(self, n_holes: int, length: int) -> None:
         self.n_holes = n_holes
         self.length = length
 
-    def __call__(self, img: torch.Tensor):
+    def __call__(self, img: torch.Tensor) -> torch.Tensor:
         '''
         Parameters
         ----------
