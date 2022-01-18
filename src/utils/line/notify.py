@@ -7,10 +7,24 @@ def line_notify(
     msg: str,
     token: str,
     width: int=10000,
-    url = 'https://notify-api.line.me/api/notify'
+    url: str='https://notify-api.line.me/api/notify'
 ) -> None:
     '''
-        https://notify-bot.line.me/ja/
+    Line Notify(https://notify-bot.line.me/ja/)へ通知を送る.
+    
+    Parameters
+    ----------
+    msg: str
+        送るメッセージ.
+
+    token: str
+        Line Notifyのトークン.
+    
+    width: int=10000
+        Lineで送信可能な最大文字数.
+    
+    url: str='https://notify-api.line.me/api/notify'
+        Line NotifyのAPIのURL.
     '''
 
     headers = {'Authorization': f'Bearer {token}'}

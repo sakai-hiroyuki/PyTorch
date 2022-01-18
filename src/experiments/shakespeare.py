@@ -141,7 +141,9 @@ class ExperimentShakespeare(Experiment):
     def _eval(self, test_loader: DataLoader) -> list[float]:
         with torch.no_grad():
             print()
+            print('+++++++++++++++++ generated +++++++++++++++++')
             print(generate_shakespeare(self.model, device=self.device))
+            print('+++++++++++++++++++++++++++++++++++++++++++++')
         return []
 
 
