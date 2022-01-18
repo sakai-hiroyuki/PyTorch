@@ -11,6 +11,8 @@ from torch.cuda import is_available
 from torch.utils.data import DataLoader
 from torch.optim import Optimizer
 
+from utils.line import line_notify
+
 __all__ = ['Experiment']
 
 
@@ -84,7 +86,8 @@ class Experiment(metaclass=ABCMeta):
         '''
         実験を実行する.
         '''
-
+        
+        line_notify('Experiment started.')
         # モデルが存在するならロードする.
         if os.path.isfile(os.path.join(self.prm_dir, self.prm_name)):
             print(f'{os.path.join(self.prm_dir, self.prm_name)} already exists.')
@@ -114,6 +117,7 @@ class Experiment(metaclass=ABCMeta):
         
         save_params(self.model, prm_dir=self.prm_dir, prm_name=self.prm_name)
         to_csv(record, csv_dir=self.csv_dir, csv_name=self.csv_name)
+        line_notify('Experiment finished.')
         return self.model
 
 

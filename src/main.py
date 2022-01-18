@@ -47,10 +47,10 @@ def mnist() -> nn.Module:
     summary(model, [1, 28, 28])
 
     experiment = ExperimentMNIST(
-        model= model,
-        optimizer=optimizer,
-        max_epoch=2,
-        batch_size=256,
+        model      = model,
+        optimizer  = optimizer,
+        max_epoch  = 2,
+        batch_size = 256,
         csv_dir    = './results/csv/mnist/cnn',
         csv_name   = 'adam.csv',
         prm_dir    = './results/prm/mnist/cnn',

@@ -15,6 +15,7 @@ torch-summary = "*"
 pandas = "*"
 mypy = "*"
 efficientnet-pytorch = "*"
+requests = "*"
 
 [requires]
 python_version = "3.9"

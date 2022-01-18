@@ -1,5 +1,6 @@
 data/
 results/
+line.json
 
 # Finder
 .DS_Store
