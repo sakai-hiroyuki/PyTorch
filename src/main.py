@@ -54,7 +54,7 @@ def mnist() -> nn.Module:
         csv_dir    = './results/csv/mnist/cnn',
         csv_name   = 'adam.csv',
         prm_dir    = './results/prm/mnist/cnn',
-        prm_name   = 'adam.prm',
+        prm_name   = 'adam.prm'
     )
 
     return experiment()

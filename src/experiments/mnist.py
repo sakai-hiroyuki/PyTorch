@@ -26,6 +26,7 @@ class ExperimentMNIST(Experiment):
         csv_name  : Optional[str] = None,
         prm_dir   : str = './results/prm/mnist',
         prm_name  : Optional[str] = None,
+        token     : Optional[str] = None,
         download  : bool=True,
     ) -> None:
 
@@ -38,7 +39,8 @@ class ExperimentMNIST(Experiment):
             csv_dir=csv_dir,
             csv_name=csv_name,
             prm_dir=prm_dir,
-            prm_name=prm_name
+            prm_name=prm_name,
+            token=token
         )
         self.download = download
     

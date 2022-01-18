@@ -67,6 +67,7 @@ class ExperimentShakespeare(Experiment):
         csv_name  : Optional[str] = None,
         prm_dir   : str = './results/prm/shakespeare',
         prm_name  : Optional[str] = None,
+        token     : Optional[str] = None,
         download  : bool = True
     ) -> None:
 
@@ -79,7 +80,8 @@ class ExperimentShakespeare(Experiment):
             csv_dir=csv_dir,
             csv_name=csv_name,
             prm_dir=prm_dir,
-            prm_name=prm_name
+            prm_name=prm_name,
+            token=token
         )
         self._vocab_size: int  = len(string.printable)
         self.data_name  : str  = data_name

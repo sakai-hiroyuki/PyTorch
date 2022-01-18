@@ -52,6 +52,7 @@ class Experiment(metaclass=ABCMeta):
         csv_name  : Optional[str] = None,
         prm_dir   : str = './results/prm',
         prm_name  : Optional[str] = None,
+        token     : Optional[str] = None
     ) -> None:
 
         self.model     : nn.Module     = model
@@ -63,6 +64,7 @@ class Experiment(metaclass=ABCMeta):
         self.csv_name  : Optional[str] = csv_name
         self.prm_dir   : str           = prm_dir
         self.prm_name  : Optional[str] = prm_name
+        self.token     : Optional[str] = token
 
         # GPUを使用するなら'cuda:0', そうでないなら'cpu'を値として持つ.
         self.device: str = 'cuda:0' if is_available() else 'cpu'
@@ -86,8 +88,9 @@ class Experiment(metaclass=ABCMeta):
         '''
         実験を実行する.
         '''
-        
-        line_notify('Experiment started.')
+        if self.token:
+            line_notify('Experiment started.', self.token)
+
         # モデルが存在するならロードする.
         if os.path.isfile(os.path.join(self.prm_dir, self.prm_name)):
             print(f'{os.path.join(self.prm_dir, self.prm_name)} already exists.')
@@ -117,7 +120,9 @@ class Experiment(metaclass=ABCMeta):
         
         save_params(self.model, prm_dir=self.prm_dir, prm_name=self.prm_name)
         to_csv(record, csv_dir=self.csv_dir, csv_name=self.csv_name)
-        line_notify('Experiment finished.')
+
+        if self.token:
+            line_notify('Experiment finished.', self.token)
         return self.model
 
 
